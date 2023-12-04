@@ -1,0 +1,53 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+<title>Collections | Online-Shop</title>
+
+{% endblock title %}
+{% block content %}
+
+    <section class="text-center container" style="margin-top: 60px;">
+        <div class="row py-lg-3">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light"> Bestseller</h1>
+                <p class="lead text-muted"> Shopping.com is a one stop destination for your family's.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae itaque ullam qui! Praesentium, cum modi culpa impedit iure rerulabore natus vero.
+                </p>
+                    <p>
+                    <a href="{% url 'login' %}" class="btn btn-primary my-2"> Already User</a>
+                    <a href="{% url 'register' %}" class="btn btn-secondary my-2"> Register</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-light py-2 my-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    
+                    <h3 class="mb-3">Categories</h3>
+                    <hr style="background-color: cadetblue;"> 
+                {% include 'shop/inc/message.html' %}
+                     
+                </div>
+                {% for item in catagory %}
+                <div class="col-md-4 mb-4 d-flex align-items-stretch ">
+                    <div class="card my-3">
+                        <img src="{{item.image.url}}" class="card-image-top" alt="categories">
+                        <a href=" {% url 'collection' item.name %}">
+                        <div class="card-body">
+                            <h4 class="card-title text-primary"> {{item.name}}</h4>
+                            <p class="card-text">{{item.description}}</p>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div> 
+
+    </section>
+
+{% endblock content %}

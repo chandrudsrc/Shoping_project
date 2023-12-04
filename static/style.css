@@ -1,0 +1,16 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,800&display=swap'); */
+
+html{
+    font-size: 20px;
+}
+body{
+    font-family:'Courier New', Courier, monospace;
+}
+
+
+carousel-item img{
+    object-fit: cover;
+    object-position: top;
+    height: 60vh;
+    overflow: hidden;
+}

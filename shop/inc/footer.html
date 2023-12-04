@@ -1,0 +1,48 @@
+<footer class="text-center text-lg-start bg-dark text-white">
+    <section class="container d-flex justify-content-center justify-content-lg-between p-4">
+        <div class="me-5 d-none d-lg-block">
+            <span>Get Connected with us on Social Media:</span>
+        </div>
+        <div >
+            <a href="#" class="mx-1 text-reset"><i class="fa fa-facebook"></i> </a>
+            <a href="#" class="mx-1 text-reset"><i class="fa fa-twitter"></i> </a>
+            <a href="#" class="mx-1 text-reset"><i class="fa fa-google"></i> </a>
+            <a href="#" class="mx-1 text-reset"><i class="fa fa-instagram"></i></a>
+            <a href="#" class="mx-1 text-reset"><i class="fa fa-linkedin"></i></a>
+            <a href="#" class="mx-1 text-reset"><i class="fa fa-github"></i></a>
+        </div>
+    </section>
+
+    <section>
+        <div class="container text-center text-md-start mt-5">
+            <div class="row mt-3">
+                <div class="col-4 col-lg-3 col-xl-3 mx-auto mb-4">
+                    <h5 class="text-uppercase mb-4"><i class="fa fa-cart-plus"></i> Shopping</h5>
+                    <p>
+                        Shopping.com is a one stop destination for your family's.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae itaque ullam qui! Praesentium, cum modi culpa impedit iure rerulabore natus vero.
+                    </p>
+                </div>
+
+                <div class="col-4 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase mb-4">Categories</h6>
+                {% for item in catagory %}
+
+                    <p><a href=" {% url 'collection' item.name %}" class="text-reset">{{item.name}}</a></p>
+                {% endfor %}
+                </div>
+                
+                <div class="col-4 col-lg-3 col-xl-3  mx-auto mb-4 ">
+                    <h6 class="text-uppercase mb-4">Contact Us</h6>
+                    <p><i class="fa fa-home"></i> Shopping</p>
+                    <p><i class="fa fa-envelope"></i> info@example.com</p>
+                    <p><i class="fa fa-phone"></i> +91 9876543210</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <div class="text-center p-4">
+        &copy; 2023 Copyright <a href="#" class="text-center ">Online-Shop</a>
+    </div>
+</footer>

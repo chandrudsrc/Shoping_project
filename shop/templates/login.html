@@ -1,0 +1,46 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+<title>User Login | Online-Shop</title>
+
+{% endblock title %}
+{% block content %}
+<div class="container " style="margin-top: 60px; height:450px">
+    <div class="row">
+        <div class="col-12">
+            <h3>User Login</h3>
+            <hr style="border-color:cadetblue;">
+    {% include 'shop/inc/message.html' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="" class="form-lable">Enter Username</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Enter Username">
+                </div>
+                <div class="mb-4">
+                    <label for="" class="form-lable">Enter Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+        
+                </form>
+            <p class="py-2">If you didn't have Account, Click here to <a href="{% url 'register' %}">Register..!</a></p>
+
+        </div>
+    </div>
+</div>
+
+<section class="mb-4">
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+           
+        </div>
+    </div>
+</div>
+</section>
+{% endblock content %}

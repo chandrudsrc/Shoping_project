@@ -1,0 +1,176 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  
+<script>
+  function myFunction(){
+      var x=document.getElementById("psw");
+      if(x.type==="password")
+      {
+          x.type="text";
+      } else {
+          x.type="password";
+      }
+      }
+  
+</script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+{% block title %}
+<title>Hello, world!</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock title %}
+  </head>
+  <style>
+  .pic_hot{
+      position: relative;
+  }
+  .hot{
+      position: absolute;
+      background-color: orangered;
+      color: white;
+      top: 0;
+      display: inline;
+      z-index: 10;
+      text-align: center;
+      font-weight: bold;
+      width: 75px;
+      border-radius: 5px;
+      right: 40px;
+
+  }
+
+#font{
+    font-size: small;
+}
+#net{
+    color: black;
+    font-weight: bold;
+    
+}
+ 
+.card-image-top{
+    width: 100%;
+    height: 30vh;
+    object-fit: contain;
+}
+    </style>
+    
+  <body>
+    {% include 'shop/inc/navbar.html' %}
+    {% block content %}
+    <!-- {% include 'shop/inc/java.js' %} -->
+
+    {% endblock content %}
+
+    
+    {% block scripts %}
+    {% endblock scripts %}
+
+    {% include 'shop/inc/footer.html' %}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+          const btnMins=document.getElementById("btnMins");
+          const btnPlus=document.getElementById("btnPlus");
+          const txtqty=document.getElementById("txtqty");
+          const pid=document.getElementById("pid");
+          const btnCart=document.getElementById("btnCart");
+          const btnfav=document.getElementById("btnfav");
+          const tkn=document.querySelector("[name='csrfmiddlewaretoken']").value;
+      
+      
+          btnPlus.addEventListener("click", function() {
+              let qty=parseInt(txtqty.value,10);
+              qty = isNaN(qty)?0:qty;
+              console.log(qty);
+              if(qty<10){
+                  qty++;
+                  txtqty.value=qty;
+              }
+          });
+      
+          btnMins.addEventListener("click", function() {
+              let qty=parseInt(txtqty.value,10);
+              qty = isNaN(qty)?0:qty;
+              if(qty>1){
+                  qty--;
+                  txtqty.value=qty;
+              }
+          });
+      
+          btnCart.addEventListener("click", function() {
+              let qty=parseInt(txtqty.value,10);
+              qty = isNaN(qty)?0:qty;
+              if(qty>0){
+                  let postObj = {
+                      'product_qty': qty,
+                      'pid' : pid.value
+                  }
+                  //console.log(postObj); 
+                  fetch('/addtocart',{
+                      method:'POST',
+                      credentials: 'same-origin',
+                      headers:{
+                          'Accept': 'applicatiion/json',
+                          'X-Requested-With': 'XMLHTTpRequest',
+                          'X-CSRFToken': '{{ csrf_token }}',
+                      },
+                      body: JSON.stringify(postObj)
+                  }).then(response => {
+                      return response.json();
+                  }).then(data => {
+                      //console.log(data);
+                      alert(data['status']);
+                  });
+      
+              }else{
+                  alert("Please enter the Quality");
+              }
+          });
+
+
+          btnfav.addEventListener("click", function() {
+           
+                let postObj = {
+                    'pid' : pid.value
+                }
+                //console.log(postObj); 
+                fetch('/fav',{
+                    method:'POST',
+                    credentials: 'same-origin',
+                    headers:{
+                        'Accept': 'applicatiion/json',
+                        'X-Requested-With': 'XMLHTTpRequest',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    body: JSON.stringify(postObj)
+                }).then(response => {
+                    return response.json();
+                }).then(data => {
+                    //console.log(data);
+                    alert(data['status']);
+                });
+            })
+      });
+      
+      </script>
+    
+
+      
+  </body>
+  
+</html>
